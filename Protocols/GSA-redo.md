@@ -59,15 +59,15 @@ input=[ i.e. GSA.final_report.txt]
 #Final report: column with snp name
 s=1
 #Final report: column with allele, p.e. [A/G]
-a=23
+a=23 / 9
 #Final report: column with snp position
-c=20
+c=20 / 8
 #Final report: column with chromosome
-x=19
+x=19 / 7
 #Final report: column with illumina norm. intensity for allele 1
-A=30
+A=30 / 10
 #Final report: column with illumina norm. intensity for allele 2
-B=31
+B=31 / 11
 
 cd $RUNDIR
 mkdir $RUNDIR/opticall_input
