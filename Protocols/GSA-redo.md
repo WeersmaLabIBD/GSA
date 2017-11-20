@@ -85,7 +85,7 @@ screen -r
 ```
 # In your first terminal window:
 for i in {1..22} {X,XY,Y,MT};
-	do mv chr_$i $RUNDIR/opticall_input;
+	do mv chr_"$i" $RUNDIR/opticall_input;
 done
 ```
 
