@@ -110,7 +110,7 @@ cd $RUNDIR/scripts
 bash create_opticall_jobs.sh
 for i in {1..22} {X,Y,MT};
 	do
-	sbatch scripts/chr_"$i"_opticall.sh;
+	sbatch $RUNDIR/scripts/chr_"$i"_opticall.sh;
 	done
 ```
 
