@@ -164,7 +164,9 @@ for i in {1..22} {X,Y};
 for i in {1..22} {X,Y,MT}; 
 	do rm plink_files/chr_"$i".tped plink_files/chr_"$i".tfam opticall_output/chr_"$i".calls opticall_output/chr_"$i".probs;
 	done
-	
+
+
+@@@@@@@@@@@@@@@HERE THHE $ VARIABLE DOESN'T WORK YET!! @@@@@@@@@@@@@@@
 # Merge all chromosomes 1-22, X and Y
 cat plink_files/chr_X.fam > plink_files/$namepreQC.fam
 cat plink_files/chr_{{1..22},X,Y}.bim > plink_files/$namepreQC.bim
