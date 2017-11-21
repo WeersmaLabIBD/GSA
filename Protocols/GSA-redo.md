@@ -168,7 +168,7 @@ for i in {1..22} {X,Y,MT};
 # Merge all chromosomes 1-22, X and Y
 cat plink_files/chr_X.fam > plink_files/$namepreQC.fam
 cat plink_files/chr_{{1..22},X,Y}.bim > plink_files/$namepreQC.bim
-(echo -en "\x6C\x1B\x01"; tail -qc +4 plink_files/chr{{1..22},X,Y}.bed) > plink_files/$namepreQC.bed
+(echo -en "\x6C\x1B\x01"; tail -qc +4 plink_files/chr_{{1..22},X,Y}.bed) > plink_files/$namepreQC.bed
 
 # Add sex to .fam file. Your [sex.info] file should be stored in your $RUNDIR
 plink --bfile plink_files/$namepreQC --update-sex $sexinfo --make-bed --out plink_files/$namepreQC 
