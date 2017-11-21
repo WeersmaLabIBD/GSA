@@ -147,7 +147,7 @@ cd $RUNDIR
 mkdir $RUNDIR/plink_files
 rm $RUNDIR/scripts/chr_*_opticall.sh
 rm $RUNDIR/opticall_input/chr_*
-rm $RUNDIR/slurm-*
+rm $RUNDIR/scripts/slurm-*
 
 # Convert optiCall output into transposed plink files
 for i in {1..22} {X,Y}; 
