@@ -96,6 +96,10 @@ Make sure the [info](https://opticall.bitbucket.io/#info-option-desc) file for o
 
 
 ```
+
+# If you need to remove MAC end of line and replace with normal end of line use a command like this:
+# for i in *.txt; do tr '^M' '\n' < $i >tmp && mv tmp $i; done
+
 # Set variables
 RUNDIR=/groups/umcg-weersma/tmp04/[your_RUNDIR]
 info=[my_info_file]
@@ -614,12 +618,14 @@ With these 'cutted' vcf files we can do the actual post imputation check. We mak
 
 ```
 # To run the IC script you should now move all chromosomes back into the same directory
+mkdir $RUNDIR/imputation/admixed/results/postimputation
 for i in {1..22}; do
-	mv $RUNDIR/scripts/admixed_chr"$i"/chr"$i".dose.vcf.cut.gz $RUNDIR/imputation/admixed/results;
+	mv $RUNDIR/scripts/admixed_chr"$i"/chr"$i".dose.vcf.cut.gz $RUNDIR/imputation/admixed/results/postimputation;
 	done
 mkdir $RUNDIR/imputation/admixed/ICoutput
+mkdir $RUNDIR/imputation/european/results/postimputation
 for i in {1..22}; do
-	mv $RUNDIR/scripts/european_chr"$i"/chr"$i".dose.vcf.cut.gz $RUNDIR/imputation/european/results;
+	mv $RUNDIR/scripts/european_chr"$i"/chr"$i".dose.vcf.cut.gz $RUNDIR/imputation/european/results/postimpution;
 	done	
 mkdir $RUNDIR/imputation/european/ICoutput
 
