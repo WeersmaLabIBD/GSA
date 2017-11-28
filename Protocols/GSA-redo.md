@@ -624,6 +624,7 @@ for i in {1..22}; do
 mkdir $RUNDIR/imputation/european/ICoutput
 
 # Now we can submit the jobs to visualise the imputation results
+bash $RUNDIR/scripts/create_IC_jobs.sh
 for i in {european,admixed};
 	do sbatch IC_"$i".sh;
 	done
