@@ -619,7 +619,7 @@ for i in {1..22}; do
 	done
 mkdir $RUNDIR/imputation/admixed/ICoutput
 for i in {1..22}; do
-	mv $RUNDIR/scripts/admixed_chr"$i"/chr"$i".dose.vcf.cut.gz $RUNDIR/imputation/european/results;
+	mv $RUNDIR/scripts/european_chr"$i"/chr"$i".dose.vcf.cut.gz $RUNDIR/imputation/european/results;
 	done	
 mkdir $RUNDIR/imputation/european/ICoutput
 
