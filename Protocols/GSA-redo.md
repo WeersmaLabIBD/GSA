@@ -566,7 +566,8 @@ RUNDIR=/groups/umcg-weersma/tmp04/[your_RUNDIR]
 ```
 for i in {european,admixed};
 do
-mkdir $RUNDIR/imputation/"$i"/results
+mkdir $RUNDIR/imputation/"$i"/results;
+done
 
 # Use wget link from Michigan imputation server to download the files to appropriate folders
 # Use password in your e-mail to unzip the zipped files
@@ -614,11 +615,11 @@ With these 'cutted' vcf files we can do the actual post imputation check. We mak
 ```
 # To run the IC script you should now move all chromosomes back into the same directory
 for i in {1..22}; do
-	mv $RUNDIR/imputation/admixed/results/chr"$i"/chr"$i".dose.vcf.cut.gz $RUNDIR/imputation/admixed/results;
+	mv $RUNDIR/scripts/admixed_chr"$i"/chr"$i".dose.vcf.cut.gz $RUNDIR/imputation/admixed/results;
 	done
 mkdir $RUNDIR/imputation/admixed/ICoutput
 for i in {1..22}; do
-	mv $RUNDIR/imputation/european/results/chr"$i"/chr"$i".dose.vcf.cut.gz $RUNDIR/imputation/european/results;
+	mv $RUNDIR/scripts/admixed_chr"$i"/chr"$i".dose.vcf.cut.gz $RUNDIR/imputation/european/results;
 	done	
 mkdir $RUNDIR/imputation/european/ICoutput
 
