@@ -638,3 +638,20 @@ for i in {european,admixed};
 # You may find the .txt, .jpg, and most informative the .html document in the ./ICoutput directory
 ```
 
+
+11. Filter, annotate and merge imputed VCFs
+---------------------------
+
+We will now filter the results based on INFO score (> 0.2) and MAF (>0.01). We make use of the scripts provided by Raul:
+filterAndAnnotateMichigan.sh   / filterAndAnnotateMichigan.job  / michiganReheading.R. We will annotate using the db150 release.
+
+```
+# Adjust the .sh script with the desired directories. Adjust the .job script with the desired tresholds for filtering and the location of the .R script. Make sure you have one folder per chromosome as the input: see example in /Tools folder
+
+bash filterAndAnnotateMichigan.sh
+
+```
+Once these jobs have fininshed we will concatenate all chromosome vcfs into one large filtered and annotated VCF to do association testing.
+
+
+
