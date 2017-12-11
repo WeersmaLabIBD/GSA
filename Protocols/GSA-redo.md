@@ -653,5 +653,10 @@ bash filterAndAnnotateMichigan.sh
 ```
 Once these jobs have fininshed we will concatenate all chromosome vcfs into one large filtered and annotated VCF to do association testing.
 
+```
+# Merge all chromosomes into one file
+# Example
+vcf-concat ../annotated/chr_1/chr_1_annotated.vcf.gz ../annotated/chr_2/chr_2_annotated.vcf.gz ../annotated/chr_3/chr_3_annotated.vcf.gz ../annotated/chr_4/chr_4_annotated.vcf.gz ../annotated/chr_5/chr_5_annotated.vcf.gz ../annotated/chr_6/chr_6_annotated.vcf.gz ../annotated/chr_7/chr_7_annotated.vcf.gz ../annotated/chr_8/chr_8_annotated.vcf.gz ../annotated/chr_9/chr_9_annotated.vcf.gz ../annotated/chr_10/chr_10_annotated.vcf.gz ../annotated/chr_11/chr_11_annotated.vcf.gz ../annotated/chr_12/chr_12_annotated.vcf.gz ../annotated/chr_13/chr_13_annotated.vcf.gz ../annotated/chr_14/chr_14_annotated.vcf.gz ../annotated/chr_15/chr_15_annotated.vcf.gz ../annotated/chr_16/chr_16_annotated.vcf.gz ../annotated/chr_17/chr_17_annotated.vcf.gz ../annotated/chr_18/chr_18_annotated.vcf.gz ../annotated/chr_19/chr_19_annotated.vcf.gz ../annotated/chr_20/chr_20_annotated.vcf.gz ../annotated/chr_21/chr_21_annotated.vcf.gz ../annotated/chr_22/chr_22_annotated.vcf.gz| gzip -c > admixed_maf001.vcf.gz
+```
 
 
