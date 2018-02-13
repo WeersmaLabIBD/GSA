@@ -13,6 +13,8 @@ rsync --partial --progress --append [your_final_report].txt lobby+calculon:[your
 
 #If you're using rsync version > 3.0 use:
 rsync --partial --progress --append-verify [your_final_report].txt lobby+calculon:[your_RUNDIR]
+
+# I used this file: GS11092017_FinalReport_small.txt 
 ```
 
 1. Set working directory and upload necessary scripts
