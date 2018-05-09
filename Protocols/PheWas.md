@@ -7,6 +7,7 @@
 
 bash create_phewas_rscripts.sh
 bash create_phewas_jobs.sh
+combined_phewas_manhatthanplot.r
 Michiel_PSI_data_opgeschoond.dta
 pheinfo.csv 
 phemap.csv
@@ -66,7 +67,14 @@ for i in {1..22}; do sbatch PheWas_chr_"$i".sh; done
 # Combine
 head -1 phewasresults/PheWas_All_snps_chr_1.csv > phewasresults/PheWas_All_snps.csv tail -n +2 -q phewasresults/PheWas_All_snps_chr_{1..22}.csv >> phewasresults/PheWas_All_snps.csv
 
+# Remove NAs from PheWas_All_snps.csv, as there are many NA results for phenotypes with < 20 cases or monomorphic snps
+
+awk 'BEGIN{FS=OFS=","} $4!="NA"{print $0}' phewasresults/PheWas_All_snps.csv > phewasresults/PheWas_All_snps_without_NA.csv
+awk 'BEGIN{FS=OFS=","} $4=="NA"{print $0}' phewasresults/PheWas_All_snps.csv > phewasresults/PheWas_All_snps_NA.csv
+
+
 # Make combined Manhattan plot
+Rscript combined_phewas_manhatthanplot.r
 
 
 
