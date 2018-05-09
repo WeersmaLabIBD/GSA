@@ -38,9 +38,16 @@ plink --bfile /groups/umcg-weersma/tmp04/Michiel/GSA-redo/phewas/plink/GSA --rec
 ---------------------------------------------------
 
 ```
-# Create R scripts per chromosome
+# Create R scripts and jobs per chromosome
 
-bash 
+bash create_phewas_rscripts.sh
+bash create_phewas_jobs.sh
+
+
+
+
+
+
 
 
 
