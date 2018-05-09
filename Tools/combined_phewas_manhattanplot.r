@@ -1,5 +1,7 @@
+library(PheWAS)
+
 # Read combined results
-results = read.csv('phewasresults/PheWas_All_snps.csv', sep = ',')
+results = read.csv('phewasresults/PheWas_All_snps_no_NA.csv', sep = ',', colClasses=c("phenotype"="character"))
 
 # Supporting files for plot
 
@@ -16,4 +18,3 @@ phewasManhattan(results, annotate.phenotype.description = T, title = "PheWas All
 dev.off()
 jpeg("phewasresults/PheWas_All_snps.jpg")
 phewasManhattan(results, annotate.phenotype.description = T, title = "PheWAS All snps")
-dev.off()
