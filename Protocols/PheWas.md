@@ -58,3 +58,21 @@ bash create_phewas_jobs.sh
 # Submit jobs to cluster (each chromosome will take approximately XX hours)
 for i in {1..22}; do sbatch PheWas_chr_"$i".sh; done
 ```
+
+3. Combine results in one results file
+---------------------------------------------------
+```
+
+# Combine
+head -1 phewasresults/PheWas_All_snps_chr_1.csv > phewasresults/PheWas_All_snps.csv tail -n +2 -q phewasresults/PheWas_All_snps_chr_{1..22}.csv >> phewasresults/PheWas_All_snps.csv
+
+# Make combined Manhattan plot
+
+
+
+
+
+
+```
+
+
