@@ -34,21 +34,15 @@ plink --bfile /groups/umcg-weersma/tmp04/Michiel/GSA-redo/phewas/plink/GSA --rec
 
 
 
-
-rsync --partial --progress [your_final_report].txt lobby+calculon:[your_RUNDIR]
-
-# Especially when you're using WiFI for the upload, the connection may very well be interupted at some stage during the upload.
-# Use the command below to continue the upload from the point where it was interupted (rsync version < 3.0)
-rsync --partial --progress --append [your_final_report].txt lobby+calculon:[your_RUNDIR]
-
-#If you're using rsync version > 3.0 use:
-rsync --partial --progress --append-verify [your_final_report].txt lobby+calculon:[your_RUNDIR]
-
-# I used this file: GS11092017_FinalReport_small.txt 
-```
-
-1. Set working directory and upload necessary scripts
+2. Prepare phenotype and run PheWas in R (here only for all maf >0.01 imputed variants)
 ---------------------------------------------------
+
+```
+# Create R scripts per chromosome
+
+bash 
+
+
 
 All scripts are available in the Github GSA/Tools directory.
 
