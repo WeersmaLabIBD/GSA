@@ -2,6 +2,18 @@
 
 # Date: 2018/05/09
 
+```
+# Make sure you have the following scripts/files available in your workdirectory (/groups/umcg-weersma/tmp04/Michiel/GSA-redo/phewas/PheWASanalysis/AllImputedsnps_maf001_parallel)
+
+bash create_phewas_rscripts.sh
+bash create_phewas_jobs.sh
+Michiel_PSI_data_opgeschoond.dta
+pheinfo.csv 
+phemap.csv
+PSI.imputation.key
+```
+
+
 1. Prepare genotype files
 ---------------------------------------------------
 ```
@@ -43,36 +55,6 @@ plink --bfile /groups/umcg-weersma/tmp04/Michiel/GSA-redo/phewas/plink/GSA --rec
 bash create_phewas_rscripts.sh
 bash create_phewas_jobs.sh
 
-
-
-
-
-
-
-
-
-All scripts are available in the Github GSA/Tools directory.
-
+# Submit jobs to cluster (each chromosome will take approximately XX hours)
+for i in {1..22}; do sbatch PheWas_chr_"$i".sh; done
 ```
-# Set run directory in which input file is stored
-RUNDIR=/groups/umcg-weersma/tmp04/[your_RUNDIR]
-
-mkdir $RUNDIR/scripts
-```
-
-Make sure the following scripts are in **$RUNDIR/scripts**
-```
- GS_to_OptiCall.sh
- OptiCall_to_plink.py
- HRC-1000G-check-bim.pl
- create_opticall_jobs.sh
- create_HRC_jobs.sh
- create_cut_jobs.sh
- create_IC_jobs.sh
- vcfparse.pl
- IC.pl
-```
-
-
-1. Convert GS final_report to optiCall input files
--------------------------------------------------------------------------
