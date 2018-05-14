@@ -83,4 +83,18 @@ Rscript combined_phewas_manhatthanplot.r
 
 ```
 
+4. Prune SNPs
+---------------------------------------------------
+```
+# # This should actually be done before the association testing, so please move up once done. 
+
+# Prune our dataset using with a 500kb window, 5 step, and 0.3 R2. (and exclude multi-allelic sites)
+module load plink
+
+plink --bfile /groups/umcg-weersma/tmp04/Michiel/GSA-redo/imputation/european/results/european_maf001/mergedplinkfiles/GSA_chr_1-22 --exclude   /groups/umcg-weersma/tmp04/Michiel/GSA-redo/imputation/european/results/european_maf001/mergedplinkfiles/GSA_chr_1-22-merge.missnp --out /groups/umcg-weersma/tmp04/Michiel/GSA-redo/phewas/PheWASanalysis/pruned/GSA_chr_1-22-prune --indep-pairwise 500 5 0.3  
+
+# 773765 before pruning
+
+plink --bfile /groups/umcg-weersma/tmp04/Michiel/GSA-redo/imputation/european/results/european_maf001/mergedplinkfiles/GSA_chr_1-22 --exclude   /groups/umcg-weersma/tmp04/Michiel/GSA-redo/imputation/european/results/european_maf001/mergedplinkfiles/GSA_chr_1-22-merge.missnp --extract /groups/umcg-weersma/tmp04/Michiel/GSA-redo/phewas/PheWASanalysis/pruned/GSA_chr_1-22-prune.prune.in --make-bed --out /groups/umcg-weersma/tmp04/Michiel/GSA-redo/phewas/PheWASanalysis/pruned/GSA_chr_1-22-pruned
+
 
