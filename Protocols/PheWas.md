@@ -56,7 +56,7 @@ plink --bfile /groups/umcg-weersma/tmp04/Michiel/GSA-redo/phewas/plink/GSA --rec
 bash create_phewas_rscripts.sh
 bash create_phewas_jobs.sh
 
-# Submit jobs to cluster (each chromosome will take approximately XX hours)
+# Submit jobs to cluster (chr 21 takes ~12 hours and uses about ~25GB memory) 
 for i in {1..22}; do sbatch PheWas_chr_"$i".sh; done
 ```
 
@@ -65,7 +65,7 @@ for i in {1..22}; do sbatch PheWas_chr_"$i".sh; done
 ```
 
 # Combine
-head -1 phewasresults/PheWas_All_snps_chr_1.csv > phewasresults/PheWas_All_snps.csv tail -n +2 -q phewasresults/PheWas_All_snps_chr_{1..22}.csv >> phewasresults/PheWas_All_snps.csv
+head -1 phewasresults/PheWas_All_snps_chr_1.csv > phewasresults/PheWas_All_snps.csv; tail -n +2 -q phewasresults/PheWas_All_snps_chr_{1..22}.csv >> phewasresults/PheWas_All_snps.csv
 
 # Remove NAs from PheWas_All_snps.csv, as there are many NA results for phenotypes with < 20 cases or monomorphic snps
 
@@ -88,13 +88,18 @@ Rscript combined_phewas_manhatthanplot.r
 ```
 # # This should actually be done before the association testing, so please move up once done. 
 
-# Prune our dataset using with a 500kb window, 5 step, and 0.3 R2. (and exclude multi-allelic sites)
+# Prune our dataset using with a 100kb window, 5 step, and 0.3 R2. (and exclude multi-allelic sites)
 module load plink
 
 plink --bfile /groups/umcg-weersma/tmp04/Michiel/GSA-redo/imputation/european/results/european_maf001/mergedplinkfiles/GSA_chr_1-22 --exclude   /groups/umcg-weersma/tmp04/Michiel/GSA-redo/imputation/european/results/european_maf001/mergedplinkfiles/GSA_chr_1-22-merge.missnp --out /groups/umcg-weersma/tmp04/Michiel/GSA-redo/phewas/PheWASanalysis/pruned/GSA_chr_1-22-prune --indep-pairwise 500 5 0.3  
 
-# 773765 before pruning
+# 7737655 variants before pruning
 
 plink --bfile /groups/umcg-weersma/tmp04/Michiel/GSA-redo/imputation/european/results/european_maf001/mergedplinkfiles/GSA_chr_1-22 --exclude   /groups/umcg-weersma/tmp04/Michiel/GSA-redo/imputation/european/results/european_maf001/mergedplinkfiles/GSA_chr_1-22-merge.missnp --extract /groups/umcg-weersma/tmp04/Michiel/GSA-redo/phewas/PheWASanalysis/pruned/GSA_chr_1-22-prune.prune.in --make-bed --out /groups/umcg-weersma/tmp04/Michiel/GSA-redo/phewas/PheWASanalysis/pruned/GSA_chr_1-22-pruned
 
+# 1085628 variants after pruning 
 
+
+ # Convert to phewas input genotype files
+ plink --bfile GSA_chr_1-22-pruned --recodeA --out GSA_chr_1-22_pruned.A
+ 
