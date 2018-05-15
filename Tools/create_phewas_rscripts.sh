@@ -127,6 +127,9 @@ phenotypes.Lieke = as.data.frame(subset(db, IDAA %in% genotypes$IDAA.PSI))
 # csv.phenotypes=read.csv("~/Documents/Werk/Promotie/PheWas/example_pheno.csv")
 
 # We will now drop variable from the phenotypes Lieke dataset that dont make sense for a PheWas
+phenotypes.Lieke$CD_time_surgery[phenotypes.Lieke$Diagnosis != "CD"] <- NA
+phenotypes.Lieke$UC_time_surgery[phenotypes.Lieke$Diagnosis == "CD"] <- NA
+
 # Also we need to convert factors to logical and numbers to integer
 
 phenotypes = phenotypes.Lieke[,c(1,2)]
