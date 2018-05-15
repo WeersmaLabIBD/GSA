@@ -18,3 +18,4 @@ phewasManhattan(results, annotate.phenotype.description = T, title = "PheWas All
 dev.off()
 jpeg("PheWas_All_snps.jpg")
 phewasManhattan(results, annotate.phenotype.description = T, title = "PheWAS All snps")
+dev.off()
