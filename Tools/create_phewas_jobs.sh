@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #set your working directory here:
-wd=/groups/umcg-weersma/tmp03/Michiel/chunks
+wd=/groups/umcg-weersma/tmp03/Michiel/phewas/chunks
 cd $wd/splits
 ls * | while read line;
     do
