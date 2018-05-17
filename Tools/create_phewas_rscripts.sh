@@ -188,12 +188,12 @@ phemap[3]=NULL
 # Better to perform on cluster: PheWas with 2 cores per chromosome
 results=phewas(phenotypes = phenotypes, genotypes = genotypes, covariates = covariates[,c("id", "CrohnsDisease")], significance.threshold = c("fdr"), min.records = 20, alpha = 0.05 ,cores=2)
 # Write results of phewas
-write.csv(results, file = "PheWas_'${line}'.csv", row.names = F, quote = F)
+write.csv(results, file = "phewasresults/PheWas_'${line}'.csv", row.names = F, quote = F)
 # Plot results
-pdf("PheWas_'${line}'.pdf")
+pdf("phewasresults/PheWas_'${line}'.pdf")
 phewasManhattan(results, annotate.phenotype.description = T, title = "PheWas '${line}'")
 dev.off()
-jpeg("PheWas_'${line}'.jpg")
+jpeg("phewasresults/PheWas_'${line}'.jpg")
 phewasManhattan(results, annotate.phenotype.description = T, title = "PheWAS '${line}'")
 dev.off() '>> "${line}".r;
 done
