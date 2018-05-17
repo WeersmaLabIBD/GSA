@@ -3,7 +3,7 @@
 mkdir phewasresults
 
 #set your working directory here:
-wd=/groups/umcg-weersma/tmp03/Michiel/phewas/test
+wd=/groups/umcg-weersma/tmp03/Michiel/phewas/chunks
 
 cd $wd/splits
 ls * | while read line;
