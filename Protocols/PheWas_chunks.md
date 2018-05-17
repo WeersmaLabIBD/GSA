@@ -1,6 +1,6 @@
 # Author: Michiel Voskuil 
 
-# Date: 2018/05/09
+Date: 2018/05/017
 
 0. Necessary files and scripts
 ---------------------------------------------------
@@ -81,7 +81,7 @@ bash create_phewas_rscripts.sh
 mv splits/chunk_*.r .
 ```
 
-2. Prepare genotype files
+2. Perform phewas
 ---------------------------------------------------
 ```
 cd $wd
@@ -91,12 +91,6 @@ cd $wd
 
 for j in chunk_*.sh; do sbatch "$j"; done
 ```
-
-
-
-
-
-
 
 
 3. Combine results in one results file
