@@ -13,6 +13,8 @@ rsync --partial --progress --append [your_final_report].txt lobby+calculon:[your
 
 #If you're using rsync version > 3.0 use:
 rsync --partial --progress --append-verify [your_final_report].txt lobby+calculon:[your_RUNDIR]
+
+# I used this file: GS11092017_FinalReport_small.txt 
 ```
 
 1. Set working directory and upload necessary scripts
@@ -96,6 +98,10 @@ Make sure the [info](https://opticall.bitbucket.io/#info-option-desc) file for o
 
 
 ```
+
+# If you need to remove MAC end of line and replace with normal end of line use a command like this:
+# for i in *.txt; do tr '^M' '\n' < $i >tmp && mv tmp $i; done
+
 # Set variables
 RUNDIR=/groups/umcg-weersma/tmp04/[your_RUNDIR]
 info=[my_info_file]
@@ -566,7 +572,8 @@ RUNDIR=/groups/umcg-weersma/tmp04/[your_RUNDIR]
 ```
 for i in {european,admixed};
 do
-mkdir $RUNDIR/imputation/"$i"/results
+mkdir $RUNDIR/imputation/"$i"/results;
+done
 
 # Use wget link from Michigan imputation server to download the files to appropriate folders
 # Use password in your e-mail to unzip the zipped files
@@ -613,20 +620,45 @@ With these 'cutted' vcf files we can do the actual post imputation check. We mak
 
 ```
 # To run the IC script you should now move all chromosomes back into the same directory
+mkdir $RUNDIR/imputation/admixed/results/postimputation
 for i in {1..22}; do
-	mv $RUNDIR/imputation/admixed/results/chr"$i"/chr"$i".dose.vcf.cut.gz $RUNDIR/imputation/admixed/results;
+	mv $RUNDIR/scripts/admixed_chr"$i"/chr"$i".dose.vcf.cut.gz $RUNDIR/imputation/admixed/results/postimputation;
 	done
 mkdir $RUNDIR/imputation/admixed/ICoutput
+mkdir $RUNDIR/imputation/european/results/postimputation
 for i in {1..22}; do
-	mv $RUNDIR/imputation/european/results/chr"$i"/chr"$i".dose.vcf.cut.gz $RUNDIR/imputation/european/results;
+	mv $RUNDIR/scripts/european_chr"$i"/chr"$i".dose.vcf.cut.gz $RUNDIR/imputation/european/results/postimpution;
 	done	
 mkdir $RUNDIR/imputation/european/ICoutput
 
 # Now we can submit the jobs to visualise the imputation results
+bash $RUNDIR/scripts/create_IC_jobs.sh
 for i in {european,admixed};
 	do sbatch IC_"$i".sh;
 	done
 
 # You may find the .txt, .jpg, and most informative the .html document in the ./ICoutput directory
 ```
+
+
+11. Filter, annotate and merge imputed VCFs
+---------------------------
+
+We will now filter the results based on INFO score (> 0.2) and MAF (>0.01). We make use of the scripts provided by Raul:
+filterAndAnnotateMichigan.sh   / filterAndAnnotateMichigan.job  / michiganReheading.R. We will annotate using the db150 release.
+
+```
+# Adjust the .sh script with the desired directories. Adjust the .job script with the desired tresholds for filtering and the location of the .R script. Make sure you have one folder per chromosome as the input: see example in /Tools folder
+
+bash filterAndAnnotateMichigan.sh
+
+```
+Once these jobs have fininshed we will concatenate all chromosome vcfs into one large filtered and annotated VCF to do association testing.
+
+```
+# Merge all chromosomes into one file
+# Example
+vcf-concat ../annotated/chr_1/chr_1_annotated.vcf.gz ../annotated/chr_2/chr_2_annotated.vcf.gz ../annotated/chr_3/chr_3_annotated.vcf.gz ../annotated/chr_4/chr_4_annotated.vcf.gz ../annotated/chr_5/chr_5_annotated.vcf.gz ../annotated/chr_6/chr_6_annotated.vcf.gz ../annotated/chr_7/chr_7_annotated.vcf.gz ../annotated/chr_8/chr_8_annotated.vcf.gz ../annotated/chr_9/chr_9_annotated.vcf.gz ../annotated/chr_10/chr_10_annotated.vcf.gz ../annotated/chr_11/chr_11_annotated.vcf.gz ../annotated/chr_12/chr_12_annotated.vcf.gz ../annotated/chr_13/chr_13_annotated.vcf.gz ../annotated/chr_14/chr_14_annotated.vcf.gz ../annotated/chr_15/chr_15_annotated.vcf.gz ../annotated/chr_16/chr_16_annotated.vcf.gz ../annotated/chr_17/chr_17_annotated.vcf.gz ../annotated/chr_18/chr_18_annotated.vcf.gz ../annotated/chr_19/chr_19_annotated.vcf.gz ../annotated/chr_20/chr_20_annotated.vcf.gz ../annotated/chr_21/chr_21_annotated.vcf.gz ../annotated/chr_22/chr_22_annotated.vcf.gz| gzip -c > admixed_maf001.vcf.gz
+```
+
 
