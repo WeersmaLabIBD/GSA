@@ -96,9 +96,14 @@ for j in chunk_*.sh; do sbatch "$j"; done
 3. Combine results in one results file
 ---------------------------------------------------
 ```
+cd $wd
 
 # Combine
-head -1 phewasresults/PheWas_All_snps_chr_1.csv > phewasresults/PheWas_All_snps.csv; tail -n +2 -q phewasresults/PheWas_All_snps_chr_{1..22}.csv >> phewasresults/PheWas_All_snps.csv
+head -1 phewasresults/PheWas_chunk_000.csv > phewasresults/PheWas_All_snps.csv; tail -n +2 -q phewasresults/PheWas_chunk*.csv >> phewasresults/PheWas_All_snps.csv
+
+
+
+
 
 # Remove NAs from PheWas_All_snps.csv, as there are many NA results for phenotypes with < 20 cases or monomorphic snps
 
