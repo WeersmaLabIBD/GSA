@@ -2,9 +2,11 @@
 
 mkdir phewasresults
 
-# check number of chunks and enter below:
+#set your working directory here:
+wd=/groups/umcg-weersma/tmp03/Michiel/phewas/test
 
-for i in {000..154};
+cd $wd/splits
+ls * | while read line;
 do
 
 echo '#install.packages("devtools")
@@ -13,7 +15,7 @@ echo '#install.packages("devtools")
 library(PheWAS)
 # https://github.com/PheWAS/PheWAS
 # Real data - genotypes
-genotypes.GSA = read.table("GSA_chunk_'$i'.A.raw", header=T, check.names = F) # takes about 4 minutes
+genotypes.GSA = read.table("'${line}'.raw", header=T, check.names = F) # takes about 4 minutes
 genotypes.GSA$FID = NULL
 genotypes.GSA$PAT = NULL
 genotypes.GSA$MAT = NULL
@@ -182,16 +184,16 @@ phemap[3]=NULL
 phemap[3]=NULL
 phemap[3]=NULL
 # Save current project
-# save.image("PheWas_GWAScat_snps.Rdata")
+# save.image("PheWas_XX.Rdata")
 # Better to perform on cluster: PheWas with 2 cores per chromosome
 results=phewas(phenotypes = phenotypes, genotypes = genotypes, covariates = covariates[,c("id", "CrohnsDisease")], significance.threshold = c("fdr"), min.records = 20, alpha = 0.05 ,cores=2)
 # Write results of phewas
-write.csv(results, file = "phewasresults/PheWas_chunk_'$i'.csv", row.names = F, quote = F)
+write.csv(results, file = "PheWas_'${line}'.csv", row.names = F, quote = F)
 # Plot results
-pdf("phewasresults/PheWas_chunk_'$i'.pdf")
-phewasManhattan(results, annotate.phenotype.description = T, title = "PheWas chunk '$i'")
+pdf("PheWas_'${line}'.pdf")
+phewasManhattan(results, annotate.phenotype.description = T, title = "PheWas '${line}'")
 dev.off()
-jpeg("phewasresults/PheWas_chunk_'$i'.jpg")
-phewasManhattan(results, annotate.phenotype.description = T, title = "PheWAS chunk '$i'")
-dev.off() '>> PheWas_chunk_"$i".r;
+jpeg("PheWas_'${line}'.jpg")
+phewasManhattan(results, annotate.phenotype.description = T, title = "PheWAS '${line}'")
+dev.off() '>> "${line}".r;
 done
