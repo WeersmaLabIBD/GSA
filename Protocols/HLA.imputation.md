@@ -1,4 +1,4 @@
-# Author: GSA HLA imputation
+# GSA HLA imputation
 
 1. Note
 ---------------------------------------------------
